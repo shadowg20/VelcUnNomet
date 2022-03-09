@@ -17,7 +17,7 @@ public class DragDropSkripts : MonoBehaviour,IPointerDownHandler,IBeginDragHandl
 		kanvasGrupa = GetComponent<CanvasGroup>();
 		//Pisklust objekta recttransform komenentu
 		velkObjRectTransf = GetComponent<RectTransform>();
-		
+
 	}
 	public void OnPointerDown(PointerEventData notikums){
 		Debug.Log ("Uzklikskinats uz velkama objekta");
@@ -41,6 +41,19 @@ public class DragDropSkripts : MonoBehaviour,IPointerDownHandler,IBeginDragHandl
 
 	public void OnEndDrag(PointerEventData notikums){
 		Debug.Log ("Beigta objekta vilksana");
-		//Vwl turpinasim
+		kanvasGrupa.alpha = 1f;
+
+		//Ja objekts nebija nolikts istaja vieta
+		if(objektuSkripts.vaiIstajaVieta == false){
+			//Tad to atkal var vilk
+			kanvasGrupa.blocksRaycasts = true;
+			//Ja nolikts istaja vieta
+		} else {
+			//Aizmirst pedejo objektu, kas vilkts
+			objektuSkripts.pedejaisVilktais = null;
+	}
+		//Ja viens objekts nolikts istaja vieta, tad lai varetu turpinat vilkt parejos
+		//iestata uz false
+		objektuSkripts.vaiIstajaVieta=false;
 	}
 }
